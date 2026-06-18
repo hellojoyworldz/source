@@ -113,7 +113,7 @@ def qna_analytics(file_input, q_input):
     faiss_store = FAISS.from_documents(documents=split_docs, embedding=ollama_embedding)
 
     # 검색
-    retriever = faiss_store.as_retriever(search_kwargs={"k", 3})
+    retriever = faiss_store.as_retriever(search_kwargs={"k": 3})
     retriever_docs = retriever.invoke(q_input)
 
     # context생성
@@ -128,7 +128,7 @@ def qna_analytics(file_input, q_input):
     질문:
     {question}
     """
-    rag_prompt = ChatPromptTemplate.from_template(message=system_message)
+    rag_prompt = ChatPromptTemplate.from_template(system_message)
     chain = rag_prompt | watson_llm | StrOutputParser()
 
 
